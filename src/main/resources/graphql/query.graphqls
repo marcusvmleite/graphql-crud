@@ -1,0 +1,14 @@
+type Person {
+    id: ID!
+    name: String!
+    email: String
+    age: Int
+    active: Boolean!
+}
+
+type Query {
+    hello: String
+    add(a:Int!, b:Int!): Int!
+    person(id: Int): Person!
+    people: [Person]
+}
