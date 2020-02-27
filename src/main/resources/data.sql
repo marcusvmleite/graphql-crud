@@ -1,5 +1,7 @@
 DROP ALL OBJECTS;
 
+CREATE SEQUENCE IF NOT EXISTS PERSON_SEQ;
+
 CREATE TABLE IF NOT EXISTS PERSON (
    id INT NOT NULL,
    name VARCHAR(50) NOT NULL,
@@ -10,9 +12,6 @@ CREATE TABLE IF NOT EXISTS PERSON (
    version INT NOT NULL,
    active INT NOT NULL DEFAULT 1
 );
-
-INSERT INTO PERSON(id, name, email, age, created, updated, version, active) values (1, 'Test', 'test@t.com', 25, '2010-01-01', '2010-01-01', 1, 1);
-commit;
 
 CREATE TABLE IF NOT EXISTS PRODUCT (
    id INT NOT NULL,

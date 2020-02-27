@@ -1,9 +1,6 @@
 package com.marcusvmleite.graphql.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,12 +9,16 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "PERSON")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "PERSON_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERSON_SEQ")
     private Long id;
 
     @Column(nullable = false)
