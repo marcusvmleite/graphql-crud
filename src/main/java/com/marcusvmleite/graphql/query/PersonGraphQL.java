@@ -30,17 +30,29 @@ public class PersonGraphQL implements GraphQLQueryResolver, GraphQLMutationResol
         return personRepository.findAll();
     }
 
-    public Person savePerson(Long id, String name, String email) {
+    public Person savePerson(PersonInput personInput) {
         Person person;
-        if (Objects.nonNull(id)) {
-            person = personRepository.findById(id).orElseThrow(() ->
-                    new IllegalArgumentException("Person not found with provided ID [" + id + "]."));
-            person.setName(name);
-            person.setEmail(email);
+        if (Objects.nonNull(personInput.getId())) {
+            person = personRepository.findById(personInput.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Person not found with provided ID [" +
+                            personInput.getId() + "]."));
+            person.setName(personInput.getName());
+            person.setEmail(personInput.getEmail());
         } else {
-            person = Person.builder().name(name).email(email).active(Boolean.TRUE).build();
+            person = Person.builder()
+                    .name(personInput.getName())
+                    .email(personInput.getEmail())
+                    .active(Boolean.TRUE)
+                    .build();
         }
         personRepository.save(person);
+        return person;
+    }
+
+    public Person deletePerson(Long id) {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Person not found with provided ID [" + id + "]."));
+        personRepository.delete(person);
         return person;
     }
 

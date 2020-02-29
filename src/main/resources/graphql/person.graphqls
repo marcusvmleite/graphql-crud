@@ -6,11 +6,20 @@ type Person {
     active: Boolean!
 }
 
+input PersonInput {
+    id: ID
+    name: String
+    email: String
+    age: Int
+    active: Boolean
+}
+
 extend type Query {
-    person(id: Int): Person!
+    person(id: Int): Person
     people: [Person]
 }
 
 extend type Mutation {
-    savePerson(id: ID, name: String, email: String): Person
+    savePerson(person: PersonInput): Person
+    deletePerson(id: ID): Person
 }

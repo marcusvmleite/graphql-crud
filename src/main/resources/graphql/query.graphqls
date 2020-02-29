@@ -1,3 +1,9 @@
+# As our type names are already Query and Mutation this schema definition would not be needed
+schema {
+    query: Query
+    mutation: Mutation
+}
+
 type Query {
     hello: String
     add(a:Int!, b:Int!): Int!
